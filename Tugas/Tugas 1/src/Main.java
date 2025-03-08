@@ -36,12 +36,13 @@ class Login{
             adminPass = "Password256";
     String studentName = "Muhammad Budi Kusuma",
             studentPass = "202410370110256";
-    String nameFormat, passFormat;
+    String nameFormat, passFormat, statusFormat;
     boolean status, isValid = false;
 
-    void format (String username, String password, Boolean isAdmin){
+    void format (String username, String password, String adminOrstudent, Boolean isAdmin){
         nameFormat = username;
         passFormat = password;
+        statusFormat = adminOrstudent;
         status = isAdmin;
     }
 
@@ -62,7 +63,7 @@ class Login{
 
     void status(){
         if(isValid){
-            System.out.printf("Login %s berhasil!", nameFormat);
+            System.out.printf("Login %s berhasil!", statusFormat);
         }else{
             System.out.printf("Login gagal! %s atau %s salah.", nameFormat, passFormat);
         }
@@ -128,7 +129,7 @@ public class Main {
 //            loginAdmin.input(); loginAdmin.status();
 
             Login login = new Login();
-            login.format("username", "password", prelogin.isAdmin());
+            login.format("username", "password", "Admin", prelogin.isAdmin());
             login.input(new Scanner(System.in));
             login.status();
         }else{
@@ -136,7 +137,7 @@ public class Main {
 //            loginMahasiswa.input(); loginMahasiswa.status();
 
             Login login = new Login();
-            login.format("Nama", "NIM", prelogin.isAdmin());
+            login.format("Nama", "NIM","Mahasiswa", prelogin.isAdmin());
             login.input(new Scanner(System.in));
             login.status();
         }
