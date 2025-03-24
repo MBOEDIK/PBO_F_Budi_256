@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -8,8 +9,9 @@ public class Main {
 }
 
 class LoginSystem{
-    Admin admin = new Admin();
-    Mahasiswa mahasiswa = new Mahasiswa();
+    Admin admin = new Admin("", "");
+    Mahasiswa mahasiswa = new Mahasiswa("", "");
+    User userInput;
 
     void tampilkanMenu(){
         Scanner input = new Scanner(System.in);
@@ -24,26 +26,31 @@ class LoginSystem{
 
         switch (pilihan){
             case 1:
-                String username, password;
-                System.out.printf("Masukkan username: "); username = input.nextLine();
-                System.out.printf("Masukkan password: "); password = input.nextLine();
-                admin.login(username, password);
+                System.out.printf("Masukkan username: "); String username = input.nextLine();
+                System.out.printf("Masukkan password: "); String password = input.nextLine();
+
+                userInput = new User(username, password);
+                admin.login(userInput);
+
                 if(admin.getAdminValid() == true){
                     System.out.printf("Login Admin berhasil!");
                 }else{
-                    System.out.printf("Login gagal! Username atau Password salah.");
+                    System.out.printf("Login gagal! Username atau Password salah.\n");
                 } break;
 
             case 2:
                 String nama, nim;
                 System.out.printf("Masukkan nama: "); nama = input.nextLine();
                 System.out.printf("Masukkan NIM: "); nim = input.nextLine();
-                mahasiswa.login(nama, nim);
+
+                userInput = new User(nama, nim);
+                mahasiswa.login(userInput);
+
                 if(mahasiswa.getAdminValid() == true){
-                    System.out.printf("Login Mahasiswa berhasil!\n");
-                    mahasiswa.displayInfo();
+                    System.out.printf("\nLogin Mahasiswa berhasil!\n");
+                    mahasiswa.DisplayInfo();
                 }else{
-                    System.out.printf("Login gagal! Nama atau NIM salah.");
+                    System.out.printf("\nLogin gagal! Nama atau NIM salah.\n");
                 } break;
             default:
                 System.out.printf("Pilihan tidak valid.");
@@ -51,34 +58,58 @@ class LoginSystem{
     }
 }
 
-class Admin{
-    String username = "Admin256";
-    String password = "Password256";
+class User{
+    private String nama, nim;
     boolean isValid = false;
 
-    void login(String nameuser, String wordpass){
-        if(nameuser.equals(username) && wordpass.equals(password)){
+    User(String nama, String nim){ this.nama = nama; this.nim = nim; }
+
+    void login(User user){
+        if(user.getNama().equals(this.nama) && user.getNim().equals(this.nim)){
             isValid = true;
         }
     }
 
+    //setter
+    public void setNama(String nama){ this.nama = nama; }
+    public void setNim(String nim){ this.nim = nim; }
+
+    //getter
     public boolean getAdminValid(){ return isValid; }
+    public String getNama(){ return nama; }
+    public String getNim(){ return nim; }
 }
 
-class Mahasiswa{
-    String nama = "Muhammad Budi Kusuma";
-    String nim = "202410370110256";
-    boolean isValid = false;
+class Admin extends User{
+    Admin(String nama, String nim){
+        super(nama, nim);
+    }
 
-    void login(String mana, String min){
-        if(mana.equals(nama) && min.equals(nim)){
+    @Override
+    void login(User user){
+        if(user.getNama().equals("Admin256") && user.getNim().equals("Password256")){
+            isValid = true;
+        }
+    }
+}
+
+class Mahasiswa extends User{
+    Mahasiswa(String nama, String nim){
+        super(nama, nim);
+    }
+
+    @Override
+    void login(User user){
+        if(user.getNama().equals("Muhammad Budi Kusuma") && user.getNim().equals("202410370110256")){
             isValid = true;
         }
     }
 
-    public boolean getAdminValid(){ return isValid; }
-
-    void displayInfo(){
-        System.out.printf("Nama: %s\nNIM: %s\n", nama, nim);
+    void DisplayInfo(){
+        System.out.printf("" +
+                "\n===============================\n" +
+                "Nama: Muhammad Budi Kusuma\n" +
+                "NIM: Muhammad Budi Kusuma" +
+                "\n===============================\n");
     }
 }
