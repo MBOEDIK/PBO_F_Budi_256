@@ -1,29 +1,3 @@
-class RekeningBank{
-    String nomorRekening, namaPemilik;
-    double saldo;
-
-    void tampilkanInfo(){
-        System.out.printf("Nomor Rekening: %s\n", nomorRekening);
-        System.out.printf("Nama Pemilik: %s\n", namaPemilik);
-        System.out.printf("Saldo: Rp%.1f\n\n", saldo);
-    }
-
-    void setorUang(double jumlah){
-        saldo += jumlah;
-        System.out.printf("%s menyetor Rp%.1f. Saldo sekarang: Rp%.1f\n", namaPemilik, jumlah, saldo);
-    }
-
-    void tarikUang(double jumlah){
-        if(saldo < jumlah){
-            System.out.printf("%s menarik %.1f. (Gagal, saldo tidak mencukupi) Saldo saat ini: %.1f\n", namaPemilik, jumlah, saldo);
-        }else{
-            saldo -= jumlah;
-            System.out.printf("%s menarik %.1f. (Berhasil) Saldo saat ini: %.1f\n", namaPemilik, jumlah, saldo);
-        }
-    }
-
-}
-
 public class Main {
     public static void main(String[] args) {
         RekeningBank rekening1 = new RekeningBank();
@@ -49,4 +23,30 @@ public class Main {
         rekening2.tampilkanInfo();
 
     }
+}
+
+class RekeningBank{
+    String nomorRekening, namaPemilik;
+    double saldo;
+
+    void tampilkanInfo(){
+        System.out.printf("Nomor Rekening: %s\n", nomorRekening);
+        System.out.printf("Nama Pemilik: %s\n", namaPemilik);
+        System.out.printf("Saldo: Rp%.1f\n\n", saldo);
+    }
+
+    void setorUang(double jumlah){
+        saldo += jumlah;
+        System.out.printf("%s menyetor Rp%.1f. Saldo sekarang: Rp%.1f\n", namaPemilik, jumlah, saldo);
+    }
+
+    void tarikUang(double jumlah){
+        if(saldo < jumlah){
+            System.out.printf("%s menarik %.1f. (Gagal, saldo tidak mencukupi) Saldo saat ini: %.1f\n", namaPemilik, jumlah, saldo);
+        }else{
+            saldo -= jumlah;
+            System.out.printf("%s menarik %.1f. (Berhasil) Saldo saat ini: %.1f\n", namaPemilik, jumlah, saldo);
+        }
+    }
+
 }
