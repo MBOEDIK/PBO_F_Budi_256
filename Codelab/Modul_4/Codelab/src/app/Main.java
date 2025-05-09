@@ -20,7 +20,7 @@ public class Main {
         anggota2.displayInfo(); System.out.printf("\n");
 
         anggota1.pinjamBuku(bukufiksi1.getJudul());
-        anggota2.pinjamBuku(bukuNonFiksi1.getJudul(), 7);
+        anggota2.pinjamBuku(bukuNonFiksi1.getJudul(), 7); System.out.printf("\n");
 
         anggota1.kembalikanBuku(bukufiksi1.getJudul());
         anggota2.kembalikanBuku(bukuNonFiksi1.getJudul()); System.out.printf("\n");

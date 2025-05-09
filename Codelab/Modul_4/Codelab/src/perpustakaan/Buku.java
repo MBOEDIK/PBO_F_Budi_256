@@ -7,7 +7,6 @@ public abstract class Buku implements DisplayInfo{
         this.judul = judul;
         this.penulis = penulis;
         this.genre = genre;
-
     }
 
     @Override

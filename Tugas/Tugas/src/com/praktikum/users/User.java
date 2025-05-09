@@ -1,15 +1,21 @@
-package com.user;
+package com.praktikum.users;
 
-public class User {
+public abstract class User {
     private String nama, nim;
     boolean isValid = false;
 
     public User(String nama, String nim){ this.nama = nama; this.nim = nim; }
 
-    public void login(User user){
-        if(user.getNama().equals(this.nama) && user.getNim().equals(this.nim)){
-            isValid = true;
-        }
+    public abstract void login(User user);
+
+    public abstract void displayAppMenu();
+
+    public void DisplayInfo(){
+        System.out.printf("" +
+                "\n===============================\n" +
+                "Nama: Muhammad Budi Kusuma\n" +
+                "NIM: 202410370110256" +
+                "\n===============================\n");
     }
 
     //setter

@@ -1,11 +1,14 @@
-package com.main;
+package com.praktikum.main;
 
 import java.util.Scanner;
-import  com.user.*;
+
+import com.praktikum.users.Admin;
+import com.praktikum.users.Mahasiswa;
+import com.praktikum.users.User;
 
 public class LoginSystem {
-    Admin admin = new Admin("", "");
-    Mahasiswa mahasiswa = new Mahasiswa("", "");
+    User admin = new Admin("", "");
+    User mahasiswa = new Mahasiswa("", "");
     User userInput;
 
     public void tampilkanMenu(){
@@ -23,14 +26,15 @@ public class LoginSystem {
         switch (pilihan){
             case 1:
                 String username, password;
-                System.out.printf("Masukkan username: "); username = input.nextLine();
+                System.out.printf("Masukkan admin: "); username = input.nextLine();
                 System.out.printf("Masukkan password: "); password = input.nextLine();
 
-                userInput = new User(username, password);
+                userInput = new Admin(username, password);
                 admin.login(userInput);
 
                 if(admin.getAdminValid()){
                     System.out.printf("Login Admin berhasil!");
+                    admin.displayAppMenu();
                 }else{
                     System.out.printf("Login gagal! Username atau Password salah.\n");
                 } break;
@@ -40,12 +44,13 @@ public class LoginSystem {
                 System.out.printf("Masukkan nama: "); nama = input.nextLine();
                 System.out.printf("Masukkan NIM: "); nim = input.nextLine();
 
-                userInput = new User(nama, nim);
+                userInput = new Mahasiswa(nama, nim);
                 mahasiswa.login(userInput);
 
                 if(mahasiswa.getAdminValid() == true){
                     System.out.printf("\nLogin Mahasiswa berhasil!\n");
                     mahasiswa.DisplayInfo();
+                    mahasiswa.displayAppMenu();
                 }else{
                     System.out.printf("\nLogin gagal! Nama atau NIM salah.\n");
                 } break;
